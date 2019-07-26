@@ -1,0 +1,45 @@
+{% set version = "2.3.3" %}
+{% set sha256 = "3e1c99f4830443f17909c94b0462566eb074e8db032c2ab9109cfe6a27c04de7" %}
+
+package:
+  name: doctest
+  version: {{ version }}
+
+source:
+  url: https://github.com/onqtam/doctest/archive/{{ version }}.zip
+  sha256: {{ sha256 }}
+
+build:
+  number: 0
+  skip: True  # [win and vc<14]
+
+requirements:
+  build:
+    - {{ compiler('cxx') }}
+    - cmake >=3.1
+    - ninja
+  host: []  # Empty host dependency section
+
+test:
+  commands:
+    - test -f ${PREFIX}/include/doctest/doctest.h             # [unix]
+    - test -f ${PREFIX}/lib/cmake/doctest/doctestConfig.cmake # [unix]
+    - if exist %LIBRARY_PREFIX%\include\doctest\doctest.h (exit 0) else (exit 1)      # [win]
+    - if exist %LIBRARY_PREFIX%\lib\cmake\doctestConfig.cmake (exit 0) else (exit 1)  # [win]
+
+about:
+  home: https://github.com/onqtam/doctest
+  license: MIT
+  license_file: LICENSE.txt
+  summary: The fastest feature-rich C++11/14/17/20 single-header testing framework for unit tests and TDD
+  description: |
+    doctest is a new C++ testing framework
+    but is by far the fastest both in compile times (by orders of magnitude)
+    and runtime compared to other feature-rich alternatives.
+    It brings the ability of compiled languages such as D / Rust / Nim
+    to have tests written directly in the production code thanks to a fast,
+    transparent and flexible test runner with a clean interface.
+
+extra:
+  recipe-maintainers:
+    - zhihao.yuan
