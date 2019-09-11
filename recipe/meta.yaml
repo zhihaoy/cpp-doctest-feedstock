@@ -1,5 +1,5 @@
-{% set version = "2.3.3" %}
-{% set sha256 = "3e1c99f4830443f17909c94b0462566eb074e8db032c2ab9109cfe6a27c04de7" %}
+{% set version = "2.3.4" %}
+{% set sha256 = "499acc36cea77f0d15dc4adcab40c31a7b8a4213dedd78884f9bf801ec4a6b0f" %}
 
 package:
   name: doctest
